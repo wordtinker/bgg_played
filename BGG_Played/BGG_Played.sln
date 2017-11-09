@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2008
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGG_Played", "BGG_Played\BGG_Played.csproj", "{CD469BDA-D0CC-49DC-8560-CF2C8CBF0CC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "..\ViewModels\ViewModels.csproj", "{3D2ABEF5-1FAB-4D26-805D-18467A2C0D32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models.csproj", "{233616F5-134D-4C55-AC35-1B7354C27646}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD469BDA-D0CC-49DC-8560-CF2C8CBF0CC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD469BDA-D0CC-49DC-8560-CF2C8CBF0CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD469BDA-D0CC-49DC-8560-CF2C8CBF0CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD469BDA-D0CC-49DC-8560-CF2C8CBF0CC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D2ABEF5-1FAB-4D26-805D-18467A2C0D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D2ABEF5-1FAB-4D26-805D-18467A2C0D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D2ABEF5-1FAB-4D26-805D-18467A2C0D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D2ABEF5-1FAB-4D26-805D-18467A2C0D32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{233616F5-134D-4C55-AC35-1B7354C27646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233616F5-134D-4C55-AC35-1B7354C27646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233616F5-134D-4C55-AC35-1B7354C27646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233616F5-134D-4C55-AC35-1B7354C27646}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55F17722-3F2F-4E0A-AC19-03B13729E571}
+	EndGlobalSection
+EndGlobal
