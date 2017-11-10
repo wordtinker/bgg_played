@@ -80,6 +80,7 @@ namespace ViewModels
                             List<Game> games = CSVFileReader.ReadGames(fileName).ToList();
                             var owned = from game in games
                                         where game.Own == true
+                                        where game.PricePaid > 0
                                         select game;
                             var prev = from game in games
                                        where game.PrevOwned == true

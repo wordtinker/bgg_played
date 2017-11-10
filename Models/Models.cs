@@ -68,7 +68,6 @@ namespace Models
             for (int page = 1; ; page++)
             {
                 XDocument doc = await BGGAPI.GetPlays(user, page);
-                // TODO
                 List<Play> playsOnPage = doc.FilterPlays();
                 if (playsOnPage.Count == 0) break;
                 plays.AddRange(playsOnPage);
