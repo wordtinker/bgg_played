@@ -36,7 +36,7 @@ namespace ViewModels
             get
             {
                 if (NumPlays == 0 || MinPlayed == 0) return PricePaid;
-                return PricePaid * 60 / MinPlayed;
+                return PricePaid * 60.0m / MinPlayed;
             }
         }
         public decimal OutTCO
@@ -44,7 +44,7 @@ namespace ViewModels
             get
             {
                 if (NumPlays == 0 || MinPlayed == 0) return PricePaid - CurrValue;
-                return (PricePaid - CurrValue) * 60 / MinPlayed;
+                return (PricePaid - CurrValue) * 60.0m / MinPlayed;
             }
         }
 
@@ -130,9 +130,10 @@ namespace ViewModels
         private async Task GatherPlaytime()
         {
             Running = true;
+            List<Play> plays = await Task.Run(() => DataCollector.GetPlaysAsync(UserName));
             foreach (var game in Owned.Union(PrevOwned))
             {
-                game.MinPlayed = await Task.Run(() => DataCollector.GetMinutesPlayedAsync(UserName, game.Id));
+                game.MinPlayed = plays.Where(p => p.GameId == game.Id).Sum(p => p.Minutes);
             }
             Running = false;
         }
