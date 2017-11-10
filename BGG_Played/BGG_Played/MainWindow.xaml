@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BGG_Played"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Games" Height="350" Width="525">
+    <Window.Resources>
+        <local:ValueToBrushConverter x:Key="ValueToBrushConverter"/>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -16,6 +20,10 @@
             <Label>Username:</Label>
             <TextBox Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25"/>
             <Button x:Name="runBtn" Content="Gather playtime" Width="90" Margin="5,0" Command="{Binding GetPlaytime}"/>
+            <Label>Hour rate:</Label>
+            <xctk:DecimalUpDown Value="{Binding HourRate}" FormatString="N2"
+                                Width="100" Minimum="0"/>
+            
         </StackPanel>
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
@@ -42,8 +50,36 @@
                         <DataGridTextColumn Header="Time(min.)" Width="*" Binding="{Binding MinPlayed}"/>
                         <DataGridTextColumn Header="Paid" Width="*" Binding="{Binding PricePaid}"/>
                         <DataGridTextColumn Header="Value" Width="*" Binding="{Binding CurrValue}"/>
-                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding InTCO, StringFormat=N2}"/>
-                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding OutTCO, StringFormat=N2}"/>
+                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding InTCO, StringFormat=N2}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource ValueToBrushConverter}">
+                                                <Binding Path="InTCO"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                                                    AncestorType={x:Type DataGrid}}" Path="DataContext.HourRate"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding OutTCO, StringFormat=N2}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource ValueToBrushConverter}">
+                                                <Binding Path="OutTCO"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                                                    AncestorType={x:Type DataGrid}}" Path="DataContext.HourRate"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
@@ -64,7 +100,21 @@
                         <DataGridTextColumn Header="Time(min.)" Width="*" Binding="{Binding MinPlayed}"/>
                         <DataGridTextColumn Header="Paid" Width="*" Binding="{Binding PricePaid}"/>
                         <DataGridTextColumn Header="Value" Width="*" Binding="{Binding CurrValue}"/>
-                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding OutTCO, StringFormat=N2}"/>
+                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding OutTCO, StringFormat=N2}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource ValueToBrushConverter}">
+                                                <Binding Path="OutTCO"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                                                    AncestorType={x:Type DataGrid}}" Path="DataContext.HourRate"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>

@@ -61,6 +61,7 @@ namespace ViewModels
         private ICommand getPlaytime;
         private bool running;
         private string userName;
+        private decimal hourRate;
 
         public ICommand OpenFile
         {
@@ -119,6 +120,7 @@ namespace ViewModels
         public ObservableCollection<GameViewModel> PrevOwned { get; }
         public bool Running { get { return running; } set { SetProperty(ref running, value); } }
         public string UserName { get { return userName; } set { SetProperty(ref userName, value); } }
+        public decimal HourRate { get { return hourRate; } set { SetProperty(ref hourRate, value); } }
         public bool CanGatherTime { get
             {
                 return !Running
