@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using LumenWorks.Framework.IO.Csv;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Models
 {
@@ -46,6 +47,15 @@ namespace Models
                     yield return Game.Create(line);
                 }
             }
+        }
+    }
+    public static class DataCollector
+    {
+        public static async Task<int> GetMinutesPlayedAsync(string user, string gameID)
+        {
+            await Task.Delay(200);
+            return 120;
+            // TODO STUB
         }
     }
 }

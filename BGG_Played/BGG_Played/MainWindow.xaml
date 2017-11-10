@@ -12,6 +12,11 @@
                 <MenuItem Header="_Open" Command="{Binding OpenFile}"/>
             </MenuItem>
         </Menu>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <Label>Username:</Label>
+            <TextBox Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25"/>
+            <Button x:Name="runBtn" Content="Gather playtime" Width="90" Margin="5,0" Command="{Binding GetPlaytime}"/>
+        </StackPanel>
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -34,8 +39,11 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Game" Width="*" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Played" Width="*" Binding="{Binding NumPlays}"/>
+                        <DataGridTextColumn Header="Time(min.)" Width="*" Binding="{Binding MinPlayed}"/>
                         <DataGridTextColumn Header="Paid" Width="*" Binding="{Binding PricePaid}"/>
                         <DataGridTextColumn Header="Value" Width="*" Binding="{Binding CurrValue}"/>
+                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding InTCO, StringFormat=N2}"/>
+                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding OutTCO, StringFormat=N2}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
@@ -53,8 +61,10 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Game" Width="*" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Played" Width="*" Binding="{Binding NumPlays}"/>
+                        <DataGridTextColumn Header="Time(min.)" Width="*" Binding="{Binding MinPlayed}"/>
                         <DataGridTextColumn Header="Paid" Width="*" Binding="{Binding PricePaid}"/>
                         <DataGridTextColumn Header="Value" Width="*" Binding="{Binding CurrValue}"/>
+                        <DataGridTextColumn Header="TCO/H" Width="*" Binding="{Binding OutTCO, StringFormat=N2}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
