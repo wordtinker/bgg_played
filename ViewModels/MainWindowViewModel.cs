@@ -115,7 +115,6 @@ namespace ViewModels
                 );
             }
         }
-        // TODO readme file + manual
         public ObservableCollection<GameViewModel> Owned { get; }
         public ObservableCollection<GameViewModel> PrevOwned { get; }
         public bool Running { get { return running; } set { SetProperty(ref running, value); } }
