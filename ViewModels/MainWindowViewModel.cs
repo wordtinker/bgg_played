@@ -12,6 +12,7 @@ namespace ViewModels
     public class GameViewModel : BindableBase
     {
         private Game game;
+        private MainWindowViewModel vm;
         private int minPlayed;
 
         public string Name { get { return game.Name; } }
@@ -25,6 +26,7 @@ namespace ViewModels
                 SetProperty(ref minPlayed, value);
                 RaisePropertyChanged(nameof(InTCO));
                 RaisePropertyChanged(nameof(OutTCO));
+                RaisePropertyChanged(nameof(Debt));
             }
         }
         public bool Own { get { return game.Own; } }
@@ -47,10 +49,27 @@ namespace ViewModels
                 return (PricePaid - CurrValue) * 60.0m / MinPlayed;
             }
         }
-
-        public GameViewModel(Game game)
+        public double Debt
+        {
+            get
+            {
+                if (vm.HourRate == 0) return 0;
+                decimal shortage = PricePaid - CurrValue - MinPlayed / 60.0m * vm.HourRate;
+                if (shortage < 0) return 0;
+                return (double)(shortage / vm.HourRate);
+            }
+        }
+        public GameViewModel(Game game, MainWindowViewModel vm)
         {
             this.game = game;
+            this.vm = vm;
+            vm.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(vm.HourRate))
+                {
+                    RaisePropertyChanged(nameof(Debt));
+                }
+            };
         }
     }
 
@@ -89,11 +108,11 @@ namespace ViewModels
                                        select game;
                             foreach (var item in owned)
                             {
-                                Owned.Add(new GameViewModel(item));
+                                Owned.Add(new GameViewModel(item, this));
                             }
                             foreach (var item in prev)
                             {
-                                PrevOwned.Add(new GameViewModel(item));
+                                PrevOwned.Add(new GameViewModel(item, this));
                             }
                         }
                         catch (System.Exception)
@@ -148,6 +167,7 @@ namespace ViewModels
             Owned.CollectionChanged += (sender, e) => { RaisePropertyChanged(nameof(CanGatherTime)); };
             PrevOwned = new ObservableCollection<GameViewModel>();
             PrevOwned.CollectionChanged += (sender, e) => { RaisePropertyChanged(nameof(CanGatherTime)); };
+            HourRate = 200;
         }
     }
 }
