@@ -15,12 +15,12 @@ namespace ViewModels
         private MainWindowViewModel vm;
         private int minPlayed;
 
-        public string Name { get { return game.Name; } }
-        public string Id { get { return game.Id; } }
-        public int NumPlays { get { return game.NumPlays; } }
+        public string Name { get => game.Name; }
+        public string Id { get => game.Id; }
+        public int NumPlays { get => game.NumPlays; }
         public int MinPlayed
         {
-            get { return minPlayed; }
+            get => minPlayed;
             set
             {
                 SetProperty(ref minPlayed, value);
@@ -29,10 +29,10 @@ namespace ViewModels
                 RaisePropertyChanged(nameof(Debt));
             }
         }
-        public bool Own { get { return game.Own; } }
-        public bool PrevOwned { get { return game.PrevOwned; } }
-        public decimal PricePaid { get { return game.PricePaid; } }
-        public decimal CurrValue { get { return game.CurrValue; } }
+        public bool Own { get => game.Own; }
+        public bool PrevOwned { get => game.PrevOwned; }
+        public decimal PricePaid { get => game.PricePaid; }
+        public decimal CurrValue { get => game.CurrValue; }
         public decimal InTCO
         {
             get
