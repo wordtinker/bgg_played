@@ -50,11 +50,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BGG_Played\ModelInterfaces\ModelInterfaces.csproj">
+    <ProjectReference Include="..\ModelInterfaces\ModelInterfaces.csproj">
       <Project>{a72f0d2e-4b4a-477b-bdef-90c6de1d7426}</Project>
       <Name>ModelInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BGG_Played\ViewModelInterfaces\ViewModelInterfaces.csproj">
+    <ProjectReference Include="..\ViewModelInterfaces\ViewModelInterfaces.csproj">
       <Project>{f6e6d5b7-41a9-48bb-959f-1b25c00e6ee0}</Project>
       <Name>ViewModelInterfaces</Name>
     </ProjectReference>

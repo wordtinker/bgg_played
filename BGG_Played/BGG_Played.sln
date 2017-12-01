@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "..\ViewModels
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models.csproj", "{233616F5-134D-4C55-AC35-1B7354C27646}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelInterfaces", "ModelInterfaces\ModelInterfaces.csproj", "{A72F0D2E-4B4A-477B-BDEF-90C6DE1D7426}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelInterfaces", "..\ModelInterfaces\ModelInterfaces.csproj", "{A72F0D2E-4B4A-477B-BDEF-90C6DE1D7426}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelInterfaces", "ViewModelInterfaces\ViewModelInterfaces.csproj", "{F6E6D5B7-41A9-48BB-959F-1B25C00E6EE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelInterfaces", "..\ViewModelInterfaces\ViewModelInterfaces.csproj", "{F6E6D5B7-41A9-48BB-959F-1B25C00E6EE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

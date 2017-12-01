@@ -114,21 +114,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ModelInterfaces\ModelInterfaces.csproj">
+      <Project>{a72f0d2e-4b4a-477b-bdef-90c6de1d7426}</Project>
+      <Name>ModelInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Models\Models.csproj">
       <Project>{233616f5-134d-4c55-ac35-1b7354c27646}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ViewModelInterfaces\ViewModelInterfaces.csproj">
+      <Project>{f6e6d5b7-41a9-48bb-959f-1b25c00e6ee0}</Project>
+      <Name>ViewModelInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ViewModels\ViewModels.csproj">
       <Project>{3d2abef5-1fab-4d26-805d-18467a2c0d32}</Project>
       <Name>ViewModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ModelInterfaces\ModelInterfaces.csproj">
-      <Project>{a72f0d2e-4b4a-477b-bdef-90c6de1d7426}</Project>
-      <Name>ModelInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ViewModelInterfaces\ViewModelInterfaces.csproj">
-      <Project>{f6e6d5b7-41a9-48bb-959f-1b25c00e6ee0}</Project>
-      <Name>ViewModelInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
