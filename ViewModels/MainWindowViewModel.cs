@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ModelInterfaces;
+using Models.Interfaces;
 using ViewModels.Interfaces;
 
 namespace ViewModels

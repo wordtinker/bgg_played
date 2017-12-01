@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Net;
 using System.Linq;
 using System;
-using ModelInterfaces;
+using Models.Interfaces;
 
 namespace Models
 {

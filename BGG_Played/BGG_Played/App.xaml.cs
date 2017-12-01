@@ -1,4 +1,4 @@
-﻿using ModelInterfaces;
+﻿using Models.Interfaces;
 using Models;
 using System.Windows;
 using ViewModels;
