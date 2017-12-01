@@ -1,17 +1,18 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows.Input;
-using Models;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ModelInterfaces;
+using ViewModels.Interfaces;
 
 namespace ViewModels
 {
     public class GameViewModel : BindableBase
     {
-        private Game game;
+        private IGame game;
         private MainWindowViewModel vm;
         private int minPlayed;
 
@@ -59,7 +60,7 @@ namespace ViewModels
                 return (double)(shortage / vm.HourRate);
             }
         }
-        public GameViewModel(Game game, MainWindowViewModel vm)
+        public GameViewModel(IGame game, MainWindowViewModel vm)
         {
             this.game = game;
             this.vm = vm;
@@ -76,6 +77,8 @@ namespace ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private IUIMainWindowService windowService;
+        private IFileReader fileReader;
+        private IDataProvider dataProvider;
         private ICommand openFile;
         private ICommand getPlaytime;
         private bool running;
@@ -89,7 +92,7 @@ namespace ViewModels
                 return openFile ??
                 (openFile = new DelegateCommand(() =>
                 {
-                    string fileName = windowService.OpenFileDialog(CSVFileReader.Extension);
+                    string fileName = windowService.OpenFileDialog(fileReader.Extension);
                     if (fileName != null)
                     {
                         Owned.Clear();
@@ -97,7 +100,7 @@ namespace ViewModels
                         try
                         {
                             // Read File
-                            List<Game> games = CSVFileReader.ReadGames(fileName).ToList();
+                            List<IGame> games = fileReader.ReadGames(fileName).ToList();
                             var owned = from game in games
                                         where game.Own == true
                                         where game.PricePaid > 0
@@ -151,7 +154,7 @@ namespace ViewModels
         private async Task GatherPlaytime()
         {
             Running = true;
-            List<Play> plays = await Task.Run(() => DataCollector.GetPlaysAsync(UserName));
+            List<IPlay> plays = await Task.Run(() => dataProvider.GetPlaysAsync(UserName));
             foreach (var game in Owned.Union(PrevOwned))
             {
                 game.MinPlayed = plays.Where(p => p.GameId == game.Id).Sum(p => p.Minutes);
@@ -160,9 +163,14 @@ namespace ViewModels
         }
 
         // ctor
-        public MainWindowViewModel(IUIMainWindowService windowService)
+        public MainWindowViewModel(
+            IUIMainWindowService windowService,
+            IFileReader fileReader,
+            IDataProvider dataProvider)
         {
             this.windowService = windowService;
+            this.fileReader = fileReader;
+            this.dataProvider = dataProvider;
             Owned = new ObservableCollection<GameViewModel>();
             Owned.CollectionChanged += (sender, e) => { RaisePropertyChanged(nameof(CanGatherTime)); };
             PrevOwned = new ObservableCollection<GameViewModel>();

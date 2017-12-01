@@ -1,12 +1,12 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
-using ViewModels;
+using ViewModels.Interfaces;
 
 namespace BGG_Played
 {
     class MainWindowService : IUIMainWindowService
     {
-        private MainWindow mainWindow;
+        private Window mainWindow;
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
@@ -26,7 +26,7 @@ namespace BGG_Played
                 return null;
             }
         }
-        public MainWindowService(MainWindow mainWindow)
+        public MainWindowService(Window mainWindow)
         {
             this.mainWindow = mainWindow;
         }

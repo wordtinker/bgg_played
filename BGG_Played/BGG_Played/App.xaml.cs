@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ModelInterfaces;
+using Models;
 using System.Windows;
+using ViewModels;
+using ViewModels.Interfaces;
 
 namespace BGG_Played
 {
@@ -13,5 +11,15 @@ namespace BGG_Played
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            MainWindow = new MainWindow();
+            // Inject dependencies
+            IDataProvider dataProvider = new DataCollector();
+            IFileReader fileReader = new CSVFileReader();
+            IUIMainWindowService service = new MainWindowService(MainWindow);
+            MainWindow.DataContext =  new MainWindowViewModel(service, fileReader, dataProvider);
+            MainWindow.Show();
+        }
     }
 }

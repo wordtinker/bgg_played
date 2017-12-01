@@ -7,15 +7,16 @@ using System.Net.Http;
 using System.Net;
 using System.Linq;
 using System;
+using ModelInterfaces;
 
 namespace Models
 {
-    public class Play
+    public class Play : IPlay
     {
         public string GameId { get; set; }
         public int Minutes { get; set; }
     }
-    public class Game
+    public class Game : IGame
     {
         public string Name { get; set; }
         public string Id { get; set; }
@@ -25,8 +26,10 @@ namespace Models
         public decimal PricePaid { get; set; }
         public decimal CurrValue { get; set; }
         public string AcquisitionDate { get; set; }
-
-        public static Game Create(string[] array)
+    }
+    internal static class GameCreator
+    {
+        internal static IGame Create(string[] array)
         {
             int.TryParse(array[3], out int nPlays);
             decimal.TryParse(array[42], out decimal pricePaid);
@@ -44,26 +47,26 @@ namespace Models
             };
         }
     }
-    public static class CSVFileReader
+    public class CSVFileReader : IFileReader
     {
-        public static string Extension { get; } = "CSV files (*.csv)|*.csv";
-        public static IEnumerable<Game> ReadGames(string fileName)
+        public string Extension { get; } = "CSV files (*.csv)|*.csv";
+        public IEnumerable<IGame> ReadGames(string fileName)
         {
             // open the CSV file with headers
             using (CsvReader csv = new CsvReader(new StreamReader(fileName), true))
             {
                 foreach(string[] line in csv)
                 {
-                    yield return Game.Create(line);
+                    yield return GameCreator.Create(line);
                 }
             }
         }
     }
-    public static class DataCollector
+    public class DataCollector : IDataProvider
     {
-        public static async Task<List<Play>> GetPlaysAsync(string user)
+        public async Task<List<IPlay>> GetPlaysAsync(string user)
         {
-            List<Play> plays = new List<Play>();
+            List<IPlay> plays = new List<IPlay>();
             // Keep looking for pages with plays
             for (int page = 1; ; page++)
             {
@@ -75,7 +78,7 @@ namespace Models
             return plays;
         }
     }
-    public static class FilterExtensions
+    internal static class FilterExtensions
     {
         public static List<Play> FilterPlays(this XDocument doc)
         {
@@ -95,7 +98,7 @@ namespace Models
             }
         }
     }
-    public static class BGGAPI
+    internal static class BGGAPI
     {
         private const int DEFAULT_DELAY = 1000;
         private static async Task<XDocument> GetXMLFrom(string uri)
@@ -131,7 +134,7 @@ namespace Models
             }
         }
 
-        public static async Task<XDocument> GetPlays(string userName, int pageNumber)
+        internal static async Task<XDocument> GetPlays(string userName, int pageNumber)
         {
             string baseURI = "https://www.boardgamegeek.com/xmlapi2/plays?username={0}&page={1}";
             string URI = string.Format(baseURI, userName, pageNumber);

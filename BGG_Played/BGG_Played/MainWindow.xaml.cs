@@ -43,8 +43,6 @@ namespace BGG_Played
     {
         public MainWindow()
         {
-            MainWindowService service = new MainWindowService(this);
-            this.DataContext = new MainWindowViewModel(service);
             InitializeComponent();
         }
     }
