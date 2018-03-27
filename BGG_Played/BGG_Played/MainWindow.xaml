@@ -80,7 +80,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Debt(H)" Width="*" Binding="{Binding Debt}"/>
+                        <DataGridTextColumn Header="Debt(H)" Width="*" Binding="{Binding Debt, StringFormat=N2}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
