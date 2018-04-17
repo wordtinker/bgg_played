@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using BGG;
 
 namespace Models.Interfaces
 {
-    public interface IPlay
-    {
-        string GameId { get; set; }
-        int Minutes { get; set; }
-    }
     public interface IGame
     {
         string AcquisitionDate { get; set; }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Models.Interfaces;
 using ViewModels.Interfaces;
+using BGG;
 
 namespace ViewModels
 {
