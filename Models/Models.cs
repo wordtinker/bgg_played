@@ -7,7 +7,7 @@ using BGG;
 
 namespace Models
 {
-    public class Game : IGame
+    public class Game : IGameModel
     {
         public string Name { get; set; }
         public string Id { get; set; }
@@ -20,7 +20,7 @@ namespace Models
     }
     internal static class GameCreator
     {
-        internal static IGame Create(string[] array)
+        internal static IGameModel Create(string[] array)
         {
             int.TryParse(array[3], out int nPlays);
             decimal.TryParse(array[43], out decimal pricePaid);
@@ -41,7 +41,7 @@ namespace Models
     public class CSVFileReader : IFileReader
     {
         public string Extension { get; } = "CSV files (*.csv)|*.csv";
-        public IEnumerable<IGame> ReadGames(string fileName)
+        public IEnumerable<IGameModel> ReadGames(string fileName)
         {
             // open the CSV file with headers
             using (CsvReader csv = new CsvReader(new StreamReader(fileName), true))

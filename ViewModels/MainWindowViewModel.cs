@@ -13,7 +13,7 @@ namespace ViewModels
 {
     public class GameViewModel : BindableBase
     {
-        private IGame game;
+        private IGameModel game;
         private MainWindowViewModel vm;
         private int minPlayed;
 
@@ -61,7 +61,7 @@ namespace ViewModels
                 return (double)(shortage / vm.HourRate);
             }
         }
-        public GameViewModel(IGame game, MainWindowViewModel vm)
+        public GameViewModel(IGameModel game, MainWindowViewModel vm)
         {
             this.game = game;
             this.vm = vm;
@@ -101,7 +101,7 @@ namespace ViewModels
                         try
                         {
                             // Read File
-                            List<IGame> games = fileReader.ReadGames(fileName).ToList();
+                            List<IGameModel> games = fileReader.ReadGames(fileName).ToList();
                             var owned = from game in games
                                         where game.Own == true
                                         where game.PricePaid > 0
@@ -158,7 +158,7 @@ namespace ViewModels
             List<IPlay> plays = await Task.Run(() => dataProvider.GetPlaysAsync(UserName));
             foreach (var game in Owned.Union(PrevOwned))
             {
-                game.MinPlayed = plays.Where(p => p.GameId == game.Id).Sum(p => p.Minutes);
+                game.MinPlayed = plays.Where(p => p.Game.Id == game.Id).Sum(p => p.Minutes);
             }
             Running = false;
         }
