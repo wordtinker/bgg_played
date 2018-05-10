@@ -10,7 +10,7 @@ namespace Models
     public class Game : IGameModel
     {
         public string Name { get; set; }
-        public string Id { get; set; }
+        public int Id { get; set; }
         public int NumPlays { get; set; }
         public bool Own { get; set; }
         public bool PrevOwned { get; set; }
@@ -22,13 +22,13 @@ namespace Models
     {
         internal static IGameModel Create(string[] array)
         {
-            int.TryParse(array[3], out int nPlays);
-            decimal.TryParse(array[43], out decimal pricePaid);
-            decimal.TryParse(array[45], out decimal currValue);
+            int.TryParse(array[3], out int nPlays); // default if fails
+            decimal.TryParse(array[43], out decimal pricePaid); // default if fails 
+            decimal.TryParse(array[45], out decimal currValue); // default if fails
             return new Game
             {
                 Name = array[0],
-                Id = array[1],
+                Id = int.Parse(array[1]), // must fail if id is broken
                 NumPlays = nPlays,
                 Own = array[5].Equals("1"),
                 PrevOwned = array[10].Equals("1"),

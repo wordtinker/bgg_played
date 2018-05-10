@@ -18,7 +18,7 @@ namespace ViewModels
         private int minPlayed;
 
         public string Name { get => game.Name; }
-        public string Id { get => game.Id; }
+        public int Id { get => game.Id; }
         public int NumPlays { get => game.NumPlays; }
         public int MinPlayed
         {
