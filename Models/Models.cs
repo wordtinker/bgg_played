@@ -23,8 +23,8 @@ namespace Models
         internal static IGameModel Create(string[] array)
         {
             int.TryParse(array[3], out int nPlays); // default if fails
-            decimal.TryParse(array[43], out decimal pricePaid); // default if fails 
-            decimal.TryParse(array[45], out decimal currValue); // default if fails
+            decimal.TryParse(array[44], out decimal pricePaid); // default if fails 
+            decimal.TryParse(array[46], out decimal currValue); // default if fails
             return new Game
             {
                 Name = array[0],
@@ -34,7 +34,7 @@ namespace Models
                 PrevOwned = array[10].Equals("1"),
                 PricePaid = pricePaid,
                 CurrValue = currValue,
-                AcquisitionDate = array[47]
+                AcquisitionDate = array[48]
             };
         }
     }
