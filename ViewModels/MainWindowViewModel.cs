@@ -176,7 +176,7 @@ namespace ViewModels
             Owned.CollectionChanged += (sender, e) => { RaisePropertyChanged(nameof(CanGatherTime)); };
             PrevOwned = new ObservableCollection<GameViewModel>();
             PrevOwned.CollectionChanged += (sender, e) => { RaisePropertyChanged(nameof(CanGatherTime)); };
-            HourRate = 200;
+            HourRate = 250;
         }
     }
 }
